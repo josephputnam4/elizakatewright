@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliza Kate Wright — Museum of Natural Creativity</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0d1b2a;
+    --navy-mid: #16293e;
+    --gold:    #c9a84c;
+    --gold-lt: #e8d5a0;
+    --parchment: #f2ead8;
+    --stone:   #8b7355;
+    --gallery: #faf8f4;
+    --ink:     #1e1a14;
+    --muted:   #6b5e4a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--parchment);
+    font-family: 'EB Garamond', Georgia, serif;
+    min-height: 100vh;
+  }
+
+  /* ── TOP MUSEUM BANNER ── */
+  .museum-bar {
+    background: var(--gold);
+    color: var(--navy);
+    text-align: center;
+    padding: .45rem 1rem;
+    font-family: 'Cormorant SC', serif;
+    font-size: .8rem;
+    letter-spacing: .18em;
+    font-weight: 600;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy-mid);
+    border-bottom: 2px solid var(--gold);
+    padding: 3.5rem 1rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Cormorant SC', serif;
+    font-size: .75rem;
+    letter-spacing: .22em;
+    color: var(--gold);
+    margin-bottom: 1.1rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--gallery);
+    letter-spacing: .01em;
+  }
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--gold-lt);
+    margin-top: .7rem;
+    letter-spacing: .04em;
+  }
+  .hero-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.6rem auto .8rem;
+  }
+  .hero-meta {
+    font-family: 'Cormorant SC', serif;
+    font-size: .78rem;
+    letter-spacing: .16em;
+    color: var(--stone);
+  }
+
+  /* ── VELVET ROPE ── */
+  .velvet-rope {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  .velvet-rope::before,
+  .velvet-rope::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .rope-icon {
+    color: var(--gold);
+    font-size: .9rem;
+    letter-spacing: .1em;
+    font-family: 'Cormorant SC', serif;
+    white-space: nowrap;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .exhibit-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 640px) {
+    .exhibit-wrap { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  /* ── PORTRAIT ── */
+  .portrait-col {}
+  .portrait-frame {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  .portrait-frame img {
+    width: 100%;
+    display: block;
+    border: 4px solid var(--stone);
+    outline: 1px solid var(--gold);
+    outline-offset: 5px;
+    filter: sepia(15%) contrast(1.05);
+  }
+  .portrait-caption {
+    font-family: 'Cormorant SC', serif;
+    font-size: .7rem;
+    letter-spacing: .14em;
+    color: var(--stone);
+    text-align: center;
+    margin-top: .9rem;
+  }
+
+  /* ── LABEL CARD ── */
+  .label-col {}
+
+  .label-card {
+    background: var(--gallery);
+    color: var(--ink);
+    padding: 1.8rem 1.6rem 1.5rem;
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 8px 32px rgba(0,0,0,.45), inset 0 0 0 1px rgba(201,168,76,.15);
+    position: relative;
+  }
+  .label-card::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    right: -6px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border: 1px solid var(--stone);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .label-artist-name {
+    font-family: 'Cormorant SC', serif;
+    font-size: 1.05rem;
+    letter-spacing: .12em;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: .2rem;
+  }
+  .label-origin {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: .88rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .label-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: .15rem;
+    line-height: 1.2;
+  }
+  .label-medium {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: .9rem;
+    color: var(--muted);
+    letter-spacing: .06em;
+    margin-bottom: 1.1rem;
+  }
+  .label-divider {
+    border: none;
+    border-top: 1px solid #d4c4aa;
+    margin-bottom: 1rem;
+  }
+  .label-body {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #2e2920;
+  }
+  .label-body strong {
+    font-weight: 600;
+    letter-spacing: .02em;
+  }
+  .label-note {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: .92rem;
+    color: var(--muted);
+    margin-top: 1rem;
+    border-top: 1px solid #d4c4aa;
+    padding-top: .85rem;
+  }
+
+  /* ── EXTENDED COPY ── */
+  .full-width-section {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .section-label {
+    font-family: 'Cormorant SC', serif;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    color: var(--gold);
+    margin-bottom: .6rem;
+    display: block;
+  }
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gallery);
+    line-height: 1.25;
+    margin-bottom: 1.1rem;
+  }
+  .section-body {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: var(--gold-lt);
+  }
+  .section-body p + p { margin-top: 1rem; }
+
+  .pull-quote {
+    border-left: 3px solid var(--gold);
+    margin: 2rem 0;
+    padding: .9rem 1.4rem;
+    background: rgba(201,168,76,.06);
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--gold-lt);
+    line-height: 1.5;
+  }
+
+  /* ── COLLECTION GRID ── */
+  .collection-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+  }
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 600px) {
+    .collection-grid { grid-template-columns: 1fr; }
+  }
+  .collection-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,.25);
+    padding: 1.2rem;
+  }
+  .collection-card-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--gallery);
+    margin-bottom: .3rem;
+  }
+  .collection-card-meta {
+    font-family: 'Cormorant SC', serif;
+    font-size: .68rem;
+    letter-spacing: .15em;
+    color: var(--stone);
+    margin-bottom: .7rem;
+  }
+  .collection-card-desc {
+    font-family: 'EB Garamond', serif;
+    font-size: .93rem;
+    line-height: 1.6;
+    color: var(--gold-lt);
+  }
+  .on-view-badge {
+    display: inline-block;
+    font-family: 'Cormorant SC', serif;
+    font-size: .62rem;
+    letter-spacing: .16em;
+    background: var(--gold);
+    color: var(--navy);
+    padding: .2rem .6rem;
+    margin-top: .8rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(201,168,76,.3);
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .footer-museum {
+    font-family: 'Cormorant SC', serif;
+    font-size: .8rem;
+    letter-spacing: .18em;
+    color: var(--stone);
+    margin-bottom: .4rem;
+  }
+  .footer-fine {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: .85rem;
+    color: rgba(139,115,85,.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="museum-bar">
+  Museum of Natural Creativity &nbsp;·&nbsp; Parade Exhibition 2026 &nbsp;·&nbsp; Gallery IV: Living Installations
+</div>
+
+<header class="hero">
+  <p class="hero-eyebrow">Featured Artist &nbsp;/&nbsp; Mixed Media</p>
+  <h1>Eliza Kate Wright</h1>
+  <p class="hero-sub">American, b. May 7, 2002</p>
+  <div class="hero-rule"></div>
+  <p class="hero-meta">Night at the Museum Float Exhibition &nbsp;·&nbsp; 2026</p>
+</header>
+
+<div class="velvet-rope" style="padding-top:2.5rem;">
+  <span class="rope-icon">✦ &nbsp; Do Not Cross &nbsp; ✦</span>
+</div>
+
+<!-- MAIN EXHIBIT SECTION -->
+<div class="exhibit-wrap">
+
+  <!-- PORTRAIT -->
+  <div class="portrait-col">
+    <div class="portrait-frame">
+      <img src="eliza1.jpeg" alt="Eliza Kate Wright, artist portrait, 2026">
+    </div>
+    <p class="portrait-caption">E.K. Wright — Artist Portrait, 2026 &nbsp;·&nbsp; Parade Collection</p>
+  </div>
+
+  <!-- LABEL CARD -->
+  <div class="label-col">
+    <div class="label-card">
+      <p class="label-artist-name">Eliza Kate Wright</p>
+      <p class="label-origin">American, b. May 7, 2002</p>
+      <p class="label-title">Tyrannosaurus Rex</p>
+      <p class="label-medium">Mixed Media Sculpture, 2026</p>
+      <hr class="label-divider">
+      <p class="label-body">
+        Artist, designer, and nursing student <strong>Eliza Kate Wright</strong> is known
+        for her creativity, perfectionism, and unwavering commitment to excellence.
+        Whether designing parade floats or large-scale installations, Wright believes
+        that exceptional work demands exceptional effort.
+      </p>
+      <p class="label-note">Please do not feed the exhibits.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- VELVET ROPE DIVIDER -->
+<div class="velvet-rope" style="padding-bottom:2.5rem;">
+  <span class="rope-icon">✦ &nbsp; Curator's Notes &nbsp; ✦</span>
+</div>
+
+<!-- EXTENDED COPY -->
+<section class="full-width-section">
+  <span class="section-label">About the Featured Work</span>
+  <h2 class="section-heading">A Dinosaur Walks Into a Parade</h2>
+  <div class="section-body">
+    <p>
+      Constructed entirely in a residential studio — or, as the artist prefers to call it,
+      "the driveway" — <em>Tyrannosaurus Rex</em> (2026) represents Wright's most ambitious
+      float to date. Fabricated from lightweight structural materials and finished with
+      theatrical surface textures, the piece achieves what few parade entries dare attempt:
+      genuine awe.
+    </p>
+    <p>
+      The work draws its conceptual energy from the <em>Night at the Museum</em> tradition —
+      the idea that history's most formidable creatures deserve not a glass case, but
+      a second chance. Wright's T. rex doesn't haunt a darkened hall; it rolls.
+    </p>
+  </div>
+
+  <div class="pull-quote">
+    <p>"Art doesn't need a museum to feel magical — sometimes it just needs a driveway, a dream, and a dinosaur."</p>
+  </div>
+
+  <div class="section-body">
+    <p>
+      Visitors to Gallery IV are reminded that while the exhibits have been known to come
+      to life after closing hours, all prehistoric specimens on the float have been
+      certified as non-migratory for the duration of the parade route.
+    </p>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="collection-section">
+  <div class="velvet-rope" style="padding-bottom:2rem;">
+    <span class="rope-icon">✦ &nbsp; Also in the Collection &nbsp; ✦</span>
+  </div>
+
+  <div class="collection-grid">
+    <div class="collection-card">
+      <p class="collection-card-title">Study in Float Architecture</p>
+      <p class="collection-card-meta">Structural Media, 2026</p>
+      <p class="collection-card-desc">Preliminary framework and armature studies for the T. rex installation. Working models in foam, wire, and determination.</p>
+      <span class="on-view-badge">On View</span>
+    </div>
+    <div class="collection-card">
+      <p class="collection-card-title">Portrait of the Artist at Work</p>
+      <p class="collection-card-meta">Documentation Photography, 2026</p>
+      <p class="collection-card-desc">Candid study of Wright in her studio practice. Notable for its depiction of creative intensity and scenic backdrop.</p>
+      <span class="on-view-badge">On View</span>
+    </div>
+    <div class="collection-card">
+      <p class="collection-card-title">Untitled (Exhibit Label)</p>
+      <p class="collection-card-meta">Ink on Card Stock, 2026</p>
+      <p class="collection-card-desc">A self-referential work in the museum-label tradition. The label describes its creator; the creator created the label. Critics are divided.</p>
+      <span class="on-view-badge">On View</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-museum">Museum of Natural Creativity &nbsp;·&nbsp; Gallery IV: Living Installations</p>
+  <p class="footer-fine">© 2026 Parade Exhibition — All exhibits may or may not be alive. The Museum is not responsible for escaped specimens.</p>
+</footer>
+
+</body>
+</html>
